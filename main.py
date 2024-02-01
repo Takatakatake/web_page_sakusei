@@ -5,6 +5,7 @@ import json
 import copy
 import io
 from collections import OrderedDict
+import multiprocessing
 
 with open('sorted_vocab.json', 'r') as f:
     sorted_vocab = json.load(f, object_pairs_hook=OrderedDict)
