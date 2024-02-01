@@ -1,42 +1,31 @@
 import streamlit as st
+import io
 
-st.title("サプーアプリ")
-st.caption('これはサプーの動画用のテストアプリです。')
+# アプリのタイトル
+st.title('テキスト処理アプリ')
 
-st.subheader('自己紹介')
-st.text('webページの作り方')
+# テキスト入力エリア
+user_input = st.text_area("ここにテキストを入力してください", "")
 
+# 処理する関数（ここでは例として大文字に変換）
+def process_text(input_text):
+    # ここに処理を追加（例：入力テキストを大文字にする）
+    return input_text.upper()
 
-code = '''
-import streamlit as st
-'''
-st.code(code,language='python')
-
-
-#画像
-from PIL import Image
-
-image = Image.open('ダウンロード.jpeg')
-st.image(image, width=200)
-##動画も可能
-
-with st.form(key='profile_form'):
-    # テキストボックス
-    name = st.text_input('名前')
-    address = st.text_input('住所')
-    # ラジオボタン
-    age_category = st.radio('年齢層',('子供','大人'))###select_boxでもいい
-    # 複数選択
-    hobby = st.multiselect('趣味',('スポーツ','読書','プログラミング','アニメ・映画'))
+# ユーザーがテキストを入力した場合に処理
+if user_input:
+    # テキストを処理
+    processed_text = process_text(user_input)
     
-    
-    # ボタン
-    submit_btn = st.form_submit_button('送信')
-    cancel_btn = st.form_submit_button('キャンセル')
-    if submit_btn:
-        st.text(f'ようこそ{name}さん！{address}に書籍を贈りました')
-        st.text(f'年齢層: {age_category}')
-        st.text(f'趣味: {", ".join(hobby)}')
-    
-# print(name)
+    # 処理後のテキストを表示
+    st.write("処理後のテキスト:")
+    st.text_area("", processed_text, height=300)
 
+    # 処理後のテキストをファイルとしてダウンロードさせる
+    to_download = io.BytesIO(processed_text.encode())
+    st.download_button(
+        label="テキストをダウンロード",
+        data=to_download,
+        file_name="processed_text.txt",
+        mime="text/plain"
+    )
