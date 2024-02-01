@@ -124,7 +124,7 @@ with st.form(key='profile_form'):
         replacements_2 = {sorted_vocab_copy[key][0]: key for key in sorted_keys if '&#' in sorted_vocab_copy[key][0]}
 
         # 並列処理の実行
-        processed_text = parallel_process(text, 2, letter_type, esperanto_to_x, x_to_jijofu, x_to_hat, replacements_1, replacements_2)
+        processed_text = parallel_process(sentence, 2, letter_type, esperanto_to_x, x_to_jijofu, x_to_hat, replacements_1, replacements_2)
         
         st.text_area("", processed_text, height=300)
           
