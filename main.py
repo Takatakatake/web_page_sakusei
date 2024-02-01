@@ -129,13 +129,13 @@ with st.form(key='profile_form'):
         st.text_area("", processed_text, height=300)
           
         
-to_download = io.BytesIO(processed_text.encode())
-st.download_button(
-label="テキストをダウンロード",
-data=to_download,
-file_name="processed_text.html",
-mime="text/plain"
-)
+# to_download = io.BytesIO(processed_text.encode())
+# st.download_button(
+# label="テキストをダウンロード",
+# data=to_download,
+# file_name="processed_text.html",
+# mime="text/plain"
+# )
     
 # print(name)
 
